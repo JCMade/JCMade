@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en" style="margin: 15px;padding: 3px;">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>CRIBS2</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/untitled.css">
+</head>
+
+<body><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script>
+      
+  function resizeIframe(obj) {
+    obj.style.height = obj.contentWindow.document.documentElement.scrollHeight + 'px';
+  }
+    
+    const queryString = window.location.search;
+// console.log(queryString);
+const urlParams = new URLSearchParams(queryString);
+//console.log(urlParams);
+
+const opMode = urlParams.get('opMode');
+
+
+const orderNumber =urlParams.get('orderNumber');
+const zendeskTicket = urlParams.get('zendeskTicket');
+const billingName = urlParams.get('billingName');
+const deliveryName = urlParams.get('deliveryName');
+
+var vatLevel = urlParams.get('vatLevel');
+        if (vatLevel == 'custom') { var vatLevel = urlParams.get('customVAT');} else {vatLevel = urlParams.get('vatLevel');}
+const currency = urlParams.get('currency');
+    
+// do swap to add in <BR> in place of carrige return 
+const billingAddress = urlParams.get('billingAddress');
+const deliveryAddress = urlParams.get('deliveryAddress');
+
+
+// items
+const qty1 = urlParams.get('qty1');
+const sku1 = urlParams.get('sku1');
+const desc1 = urlParams.get('desc1');
+//if(isNaN(urlParams.get('price1'))) { const price1 = null; } else {
+    var price1 = parseFloat(urlParams.get('price1')).toFixed(2); //}
+const qty2 = urlParams.get('qty2');
+const sku2 = urlParams.get('sku2');
+const desc2 = urlParams.get('desc2');
+var price2 = parseFloat(urlParams.get('price2')).toFixed(2);
+const qty3 = urlParams.get('qty3');
+const sku3 = urlParams.get('sku3');
+const desc3 = urlParams.get('desc3');
+var price3 = parseFloat(urlParams.get('price3')).toFixed(2);
+    
+    if(isNaN(price1)) { var price1 = 0;}
+    if(isNaN(price2)) { var price2 = 0;}
+    if(isNaN(price3)) { var price3 = 0;}
+    
+const deliveryPrice = urlParams.get('deliveryPrice');
+const discount = urlParams.get('discount');
+var returnFee = parseFloat(urlParams.get('returnFee')).toFixed(2);
+ if (isNaN(returnFee)){ var returnFee =0;}
+
+// BACS details 
+const totalOrder = urlParams.get('totalOrder');
+const refundAmount = urlParams.get('refundAmount');
+const paymentReference = urlParams.get('paymentReference');
+const paymentMethod = urlParams.get('paymentMethod');
+const refundReason = urlParams.get('refundReason');
+const bacsReason = urlParams.get('bacsReason');
+const sortCode = urlParams.get('sortCode');
+const accountNumber = urlParams.get('accountNumber');
+
+const requestedBy = urlParams.get('requestedBy');
+
+    
+    
+//// functions
+Intl.NumberFormat
+
+// Create our number formatter.
+var formatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'GBP',
+
+  //maximumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
+});
+
+//formatter.format(2500); /* $2,500.00 */
+    
+</script><script>
+    if(opMode == 'BACS')
+        { document.write("bacs mode");
+            //document.write("<iframe src='bacs.html'  frameborder='0' scrolling='no' height=1024 width=1068></iframe>");
+         //document.write('<p class="inc:bacs.html"></p>')
+         $(document).ready(function(){
+           $('#bacs').load("bacs.html");   
+           // document.write('<div id="bacs">hello</div>');    
+         });
+         
+         $(function(){alert(9);});
+         
+           document.write("<br><hr>");
+            //document.write('<object data ="bacs.html" style="width:100%;height:100vh;margin:0px;"></object>');
+            //document.write('<div style="break-after:page></div><br>"');
+                       
+    
+        }
+    
+</script>
+    <div class="container">
+        <div class="row">
+            <div class="col"><img src="assets/img/MADE.COM-LOGO-RGB_black.jpg" width="300">
+                <p>MADE.COM Design Limited</p>
+            </div>
+            <div class="col text-end"><script>
+    if(opMode === 'credit'){
+        document.write('<img src="credit.png">');
+    } else {
+        document.write('<img src="assets/img/invoice.png">');
+    }
+</script></div>
+        </div>
+    </div>
+    <div class="container">
+        <p><br></p>
+        <div class="row">
+            <div class="col">
+                <p style="font-size: 13px;">5 Singer Street<br>London<br>EC2 4BQ<br>Tel: 0344 257 1888<br><br></p>
+            </div>
+            <div class="col text-end">
+                <p style="font-size: 13px;"><p>Invoice Number:  <script>document.write(orderNumber);</script><br /><br />Invoice Date: 
+    <script>
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = today.getFullYear();
+
+    today = dd + '/' + mm + '/' + yyyy;
+    document.write(today);
+    </script>  
+        <br /></p></p>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col"><script>
+//document.write(billingAddress);
+    var cleanbillingAddress = billingAddress;
+   //document.write(deliveryAddress);
+    cleanbillingAddress = billingAddress.replace(/(?:\r\n|\r|\n)/g, '<br>');
+    document.write(billingName+'<br/>');
+    document.write(cleanbillingAddress);
+    
+
+</script></div>
+            <div class="col text-end"><script>//document.write(deliveryAddress);
+    var cleandeliveryAddress = deliveryAddress;
+   //document.write(deliveryAddress);
+    cleandeliveryAddress = deliveryAddress.replace(/(?:\r\n|\r|\n)/g, '<br>');
+    document.write(deliveryName+'<br/>');
+    document.write(cleandeliveryAddress);
+</script></div>
+        </div>
+    </div>
+    <div class="container">
+        <p>&nbsp;</p>
+        <p class="text-center" style="font-size: 13px;"><strong>Please note that payment is required within 30 days of the date of this invoice, using the invoice number as the payment reference.</strong><br><br><strong>Once payment has been made please provide the relevant remittance advice slip to enable our Accounts Team to confirm payment has been received. PLEASE NOTE: The order will not be released until payment has been confirmed.</strong><br><br></p>
+    </div>
+    <div class="container">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Product SKU</th>
+                        <th class="text-start">Product Name</th>
+                        <th class="text-center">Quantity</th>
+                        <th class="text-center">Unit Price (inc. VAT)</th>
+                        <th class="text-end">Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><script>document.write(sku1);</script></td>
+                        <td class="text-start"><script>document.write(desc1);</script></td>
+                        <td class="text-center"><script>document.write(qty1);</script></td>
+                        <td class="text-center"><script>document.write(price1);</script></td>
+                        <td class="text-end"><script>parseFloat(document.write(qty1*price1)).toFixed(2);</script></td>
+                    </tr>
+                    <tr>
+                        <td><script>document.write(sku2);</script></td>
+                        <td class="text-start"><script>document.write(desc2);</script></td>
+                        <td class="text-center"><script>document.write(qty2);</script></td>
+                        <td class="text-center"><script>document.write(price2);</script></td>
+                        <td class="text-end"><script>document.write(parseFloat(qty2*price2).toFixed(2));</script></td>
+                    </tr>
+                    <tr>
+                        <td><script>document.write(sku3);</script></td>
+                        <td class="text-start"><script>document.write(desc3);</script></td>
+                        <td class="text-center"><script>document.write(qty3);</script></td>
+                        <td class="text-center"><script>document.write(price3);</script></td>
+                        <td class="text-end"><script>document.write(qty3*price3);</script></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <p>&nbsp;</p>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <p><strong>MADE.COM Bank Details</strong><br>Account Name: MADE.COM Design Ltd<br>Bank Name:HSBC Bank Plc.<br>Sort Code: 40-05-09<br>Account Number: 01519360<br>BIC:MIDLGB2141N<br>IBAN:GB61MIDL40050901519360<br><br></p>
+            </div>
+            <div class="col">
+                <p class="text-end">&nbsp; <script> //subtotal
+  // document.write(currency);
+    
+   switch(currency) {
+       case 'GBP':  var Symbol = '£';
+        break;
+       case 'EUR': var Symbol = '€';
+           break;
+       case 'CHF':  var Symbol = 'CHF';
+           break;
+        default : var Symbol = '£';
+   } 
+    
+    var sub = parseFloat((qty1*price1)+(qty2*price2)+(qty3*price3)).toFixed(2);
+    document.write('Subtotal: '+Symbol+sub+'<br/>');
+    
+    var grand = parseFloat((Number(sub)+Number(deliveryPrice))).toFixed(2);
+    document.write('Delivery: '+Symbol+parseFloat(deliveryPrice).toFixed(2)+'<br/>');
+    document.write('Return Fee: '+Symbol+parseFloat(returnFee).toFixed(2)+'<br/><br/>');
+   
+    document.write('Total:  '+Symbol+grand+'<br/>');
+    //document.write(vatLevel);
+    var VAT = vatLevel / 100;
+    var VATPrice = parseFloat((VAT * grand)).toFixed(2);
+    var NetPrice = parseFloat((grand-VATPrice)).toFixed(2);
+    
+    document.write('Net: '+Symbol+NetPrice+'<br/>');
+    document.write('VAT @'+vatLevel+'%:  '+Symbol+VATPrice+'<br/>');
+    
+    //    var grandTotal = (number(sub) + number(deliveryPrice)) - number(discount);
+    
+  //  let grandTotal = number(sub)+number(deliveryPrice) - discount;
+   // document.write(grandTotal);
+    
+    //document.write('Delivery: '+deliveryPrice+'<br/>Discount:'+discount+'<br/><br/>Net: '+grandTotal);
+    
+ //   document.write("hello");
+ //   var VAT = +grandTotal/.2; // VAT RATE
+    //document.write('Delivery'+delivery);
+    
+    //var grandtotal = (sub++delivery);
+</script>&nbsp;&nbsp;<script>
+
+</script><br><br></p>
+            </div>
+        </div>
+    </div>
+    <p class="fs-6 fw-light text-center"><br><br>MADE.COM Design Limited is a company registered in England and Wales<br>Company no.07101408 | VAT GB998057263<br><br><br><br></p>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/cribs.js"></script>
+    <script src="assets/js/requirejs.js"></script>
+</body>
+
+</html>

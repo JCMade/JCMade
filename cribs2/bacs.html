@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <title>CRIBS2</title>
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+    <link rel="stylesheet" href="assets/css/untitled.css">
+</head>
+
+<body><script>
+    const queryString = window.location.search;
+// console.log(queryString);
+const urlParams = new URLSearchParams(queryString);
+//console.log(urlParams);
+
+const opMode = urlParams.get('opMode');
+
+
+const orderNumber =urlParams.get('orderNumber');
+const zendeskTicket = urlParams.get('zendeskTicket');
+const billingName = urlParams.get('billingName');
+const deliveryName = urlParams.get('deliveryName');
+
+// do swap to add in <BR> in place of carrige return 
+const billingAddress = urlParams.get('billingAddress');
+const deliveryAddress = urlParams.get('deliveryAddress');
+
+
+// items
+const qty1 = urlParams.get('qty1');
+const sku1 = urlParams.get('sku1');
+const desc1 = urlParams.get('desc1');
+const price1 = urlParams.get('price1');
+const qty2 = urlParams.get('qty2');
+const sku2 = urlParams.get('sku2');
+const desc2 = urlParams.get('desc2');
+const price2 = urlParams.get('price2');
+const qty3 = urlParams.get('qty3');
+const sku3 = urlParams.get('sku3');
+const desc3 = urlParams.get('desc3');
+const price3 = urlParams.get('price3');
+    
+const deliveryPrice = urlParams.get('deliveryPrice');
+const discount = urlParams.get('discount');
+
+
+// BACS details 
+const totalOrder = urlParams.get('totalOrder');
+const refundAmount = urlParams.get('refundAmount');
+const paymentReference = urlParams.get('paymentReference');
+const paymentMethod = urlParams.get('paymentMethod');
+const refundReason = urlParams.get('refundReason');
+const bacsReason = urlParams.get('bacsReason');
+const sortCode = urlParams.get('sortCode');
+const accountNumber = urlParams.get('accountNumber');
+
+const requestedBy = urlParams.get('requestedBy');
+
+    
+    
+//// functions
+Intl.NumberFormat
+
+// Create our number formatter.
+var formatter = new Intl.NumberFormat('en-US', {
+  style: 'currency',
+  currency: 'GBP',
+
+  //maximumFractionDigits: 0, // (causes 2500.99 to be printed as $2,501)
+});
+
+//formatter.format(2500); /* $2,500.00 */
+    
+</script>
+    <div class="container">
+        <p><br><img src="assets/img/MADE.COM-LOGO-RGB_black.jpg" style="width: 400px;text-align: left;"><br></p>
+        <div></div>
+    </div>
+    <h1 style="text-align: center;"><br>Direct Bank Transfer Refund Request</h1>
+    <div class="container">
+        <p style="text-align: right;"><br><br>Date:&nbsp;     <script>
+        var today = new Date();
+        var dd = String(today.getDate()).padStart(2, '0');
+        var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+        var yyyy = today.getFullYear();
+
+    today = dd + '/' + mm + '/' + yyyy;
+    document.write(today);
+    </script>  
+        <br /></p>
+        <div class="row">
+            <div class="col">
+                <p><strong>Customer Name:</strong>&nbsp; <script>document.write(billingName);</script><br><strong>ERP Order Reference</strong>: <script>document.write(orderNumber);</script><br><strong>Original Payment Reference:</strong>&nbsp;&nbsp;<script>document.write(paymentReference); </script></p>
+            </div>
+            <div class="col">
+                <p style="text-align: right;"><strong>Order Amount:</strong>&nbsp; $orderAmount<br><strong>Be2Bill / Paypal:</strong>&nbsp; $method<br></p>
+            </div>
+        </div>
+    </div>
+    <p>&nbsp;</p>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <p>Refund Amount&nbsp; $refundAmount</p>
+            </div>
+            <div class="col">
+                <p>$CURRENCY</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <p>Refund Amount&nbsp; $refundAmount</p>
+            </div>
+            <div class="col">
+                <p>$CURRENCY</p>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <p>&nbsp;<br>Reason for Refund:</p>
+        <p>&nbsp;<br>Reason for BACS:</p>
+    </div>
+    <div class="container">
+        <p><strong>Customer Bank Account Details:</strong></p>
+        <div class="row">
+            <div class="col">
+                <p>Sort Code:&nbsp; $sortCode</p>
+            </div>
+            <div class="col">
+                <p>Account Number:&nbsp; $accountNumber</p>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <p><br>Requested By:&nbsp; ___________________________________________<br><br><br>Approved by Manager: __________________________________</p>
+            </div>
+            <div class="col">
+                <p><br>Signature:&nbsp; ________________________________________<br><br><br>Signature: _________________________________________</p>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <p><br><br><strong>Required Supporting Documents:</strong><br><strong>&nbsp; </strong>Copy of Invoice&nbsp;&nbsp;☐<br>&nbsp; Proof of Original Payment&nbsp;☐<br>&nbsp; Proof of Bank Details&nbsp;☐<br>&nbsp; Credit Note&nbsp;☐<br>&nbsp; Reason for Return&nbsp;☐</p>
+    </div>
+    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/js/cribs.js"></script>
+    <script src="assets/js/requirejs.js"></script>
+</body>
+
+</html>
